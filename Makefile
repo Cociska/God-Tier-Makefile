@@ -153,7 +153,7 @@ branch:
 
 git_log:
 	@clear
-	@$(SCRIPTS_PATH)/history.sh
+	@$(SCRIPTS_PATH)/git_log.sh
 
 # ==================================================
 # Info rules
