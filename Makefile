@@ -8,6 +8,13 @@ CSFMLFLAGS      = -lcsfml-window -lcsfml-graphics -lcsfml-audio -lcsfml-system
 MATHSFLAGS      = -lm
 CRITERION_FLAGS = -lcriterion --coverage
 
+# ==============================================================================
+#   LOCATION & VIBES
+# ==============================================================================
+
+CITY        	= Lille
+RADIO_URL   	= https://www.youtube.com/watch?v=jfKfPfyJRdk
+
 # ==================================================
 # Colors
 # ==================================================
@@ -38,7 +45,7 @@ SRC_TESTS = $(TESTS_PATH)tests.c
 
 OBJ       = $(SRC:.c=.o)
 
-NAME      = my_ls
+NAME      = project_name
 TEST_BIN  = test_runner
 
 # ==================================================
@@ -50,7 +57,6 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@$(CC) -o $(NAME) $(OBJ)
 	@echo "$(C_GREEN)Compiled (^_^)$(C_RESET)"
-	@$(MAKE) --no-print-directory signature
 
 %.o: %.c
 	@echo "$(C_BLUE)Compiling $<$(C_RESET)"
@@ -65,21 +71,27 @@ auto_build:
 # Run & Debug
 # ==================================================
 
-run: all
+run:
+	@clear
+	all
 	@./$(NAME)
 	@echo "$(C_GREEN)Program executed correctly :<$(C_RESET)"
 
 docker:
+	@clear
 	@echo "$(C_BLUE)Starting Epitech Docker...$(C_RESET)"
 	@docker run -it -v ./:/usr/app epitechcontent/epitest-docker:latest
 
 debug:
+	@clear
 	@gcc -g3 $(SRC) -o $(NAME)_debug $(CFLAGS)
 	@echo "$(C_CYAN)>>> Starting GDB...$(C_RESET)"
 	@gdb -ex "break main" -ex "run" ./$(NAME)_debug
 	@rm -f $(NAME)_debug
 
-leaks: all
+leaks:
+	@clear
+	all
 	@valgrind --leak-check=full ./$(NAME)
 
 # ==================================================
@@ -87,10 +99,11 @@ leaks: all
 # ==================================================
 
 tests:
-	@$(TESTS_CC) $(CFLAGS) $(SRC) $(SRC_TESTS) -o $(TEST_BIN) $(CRITERION_FLAGS)
+	@clear
+	@gcc $(CFLAGS) $(SRC) $(SRC_TESTS) -o $(TEST_BIN) $(CRITERION_FLAGS)
 	@echo "$(C_YELLOW)Tests compiled :9$(C_RESET)"
 	@./$(TEST_BIN)
-	@echo "$(C_GREEN)Tests executed without errors ^^;$(C_RESET)"
+	@echo "$(C_GREEN)Tests executed ^^;$(C_RESET)"
 
 coverage: tests
 	@lcov -c -d . -o coverage.info --ignore-errors mismatch
@@ -101,13 +114,13 @@ coverage: tests
 	@echo "$(C_CYAN)HTML coverage report generated ^^;$(C_RESET)"
 	@$(BROWSER) html_report/index.html
 	@echo "$(C_GREEN)Coverage report opened in browser :)$(C_RESET)"
-	@$(MAKE) --no-print-directory signature
 
 # ==================================================
 # Cleaning
 # ==================================================
 
 clean:
+	@clear
 	@rm -f $(OBJ)
 	@echo "$(C_BLUE)Object files removed :D$(C_RESET)"
 	@rm -f *.gcda *.gcno *.gcov
@@ -119,7 +132,7 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "$(C_CYAN)Binary removed <_<$(C_RESET)"
 
-re: fclean all
+re: 	fclean all
 	@echo "$(C_BOLD)$(C_YELLOW)Project rebuilt successfully \\o/$(C_RESET)"
 
 # ==================================================
@@ -129,7 +142,6 @@ re: fclean all
 commit:
 	@clear
 	@$(SCRIPTS_PATH)/commit.sh
-	@$(MAKE) --no-print-directory signature
 
 restore:
 	@clear
@@ -148,6 +160,7 @@ git_log:
 # ==================================================
 
 count:
+	@clear
 	@echo ""
 	@echo "$(C_BOLD)$(C_CYAN)Lines of C code:$(C_RESET)"
 	@echo "$(C_CYAN)------------------$(C_RESET)"
@@ -171,15 +184,17 @@ star_wars:
 	@ssh starwarstel.net
 
 pomodoro:
+	@clear
 	@$(SCRIPTS_PATH)/pomodoro.sh
 
 weather:
 	@clear
-	@curl -s "wttr.in/Lille?format=3"
+	@curl -s "wttr.in/$(CITY)?format=3"
 	@echo ""
-	@curl -s "wttr.in/Lille?0"
+	@curl -s "wttr.in/$(CITY)?0"
 
 coffee:
+	@clear
 	@$(SCRIPTS_PATH)/coffee.sh
 
 joke:
@@ -189,7 +204,7 @@ joke:
 
 radio:
 	@echo "$(C_PURPLE)>>> Tuning in to Lofi Girl Radio... 🎧$(C_RESET)"
-	@mpv --no-video --really-quiet "https://www.youtube.com/watch?v=jfKfPfyJRdk" &
+	@mpv --no-video --really-quiet "$(RADIO_URL)" &
 	@echo "$(C_CYAN)Radio started in background. Use 'killall mpv' to stop.$(C_RESET)"
 
 menu:
