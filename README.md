@@ -57,7 +57,6 @@ This script installs system dependencies (FZF, Valgrind, Inotify, MPV...), Pytho
 and deploys scripts to `~/Makefile/scripts`.
 
 ```bash
-chmod +x install.sh
 ./install.sh
 ```
 
