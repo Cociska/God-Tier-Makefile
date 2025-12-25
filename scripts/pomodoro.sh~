@@ -1,0 +1,84 @@
+#!/bin/bash
+
+# --- CONFIGURATION ---
+MUSIC_DIR="$HOME/Makefiles/music"
+FOCUS_TIME=1500
+BREAK_TIME=300
+
+# --- COULEURS ---
+RED='\033[31m'
+GREEN='\033[32m'
+BLUE='\033[34m'
+PURPLE='\033[35m'
+CYAN='\033[36m'
+WHITE='\033[97m'
+RESET='\033[0m'
+
+# --- SETUP MOC ---
+mocp -S >/dev/null 2>&1
+mocp -c
+mocp -a "$MUSIC_DIR"
+mocp -o shuffle
+mocp -p
+
+# Fonction pour nettoyer en quittant (Ctrl+C)
+cleanup() {
+    mocp -x
+    clear
+    exit 0
+}
+trap cleanup INT
+
+# --- BOUCLE PRINCIPALE ---
+STATUS="FOCUS"
+TIMER=$FOCUS_TIME
+
+while true; do
+    # Récupération infos musique
+    RAW_FILE=$(mocp -Q "%file" 2>/dev/null)
+    FILENAME=$(basename "$RAW_FILE")
+    # On retire l'extension
+    CLEAN_NAME="${FILENAME%.*}"
+    TIME_INFO=$(mocp -Q "%ct/%tt" 2>/dev/null)
+
+    # Affichage
+    printf "\033[H" # Remplace 'clear' pour éviter le clignotement
+    
+    # Header Date
+    echo -e "${PURPLE}$(date '+%A %d %B %Y — %H:%M:%S')${RESET}"
+    
+    # Infos User
+    printf "${CYAN}USER  : %s\nOWNER : %s\nPWD   : %s${RESET}\n\n" "$USER" "$(whoami)" "$(pwd)"
+
+    # ASCII Art (Rouge)
+    echo -e "${RED}⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⠀⠀⠀⠀⠀⠀⠀⡄⠀⠀"
+    echo -e "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣿⠛⣿⠀⠀⠀⠀⣤⣿⢻⡇⠀"
+    echo -e "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣿⡛⠀⣤⣿⣿⣤⣤⣿⣿⣤⢸⡇⠀"
+    echo -e "⠀⠀⠀⠀⠀⠀⠀⠀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀"
+    echo -e "⠀⠀⠀⠀⠀⠀⠀⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡗⠀"
+    echo -e "⢠⣼⣿⣿⣿⣿⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷"
+    echo -e "⢸⣿⣿⡟⠛⠛⢿⣿⣿⣿⣿⣿⣿⣤⣤⣤⣿⣿⣿⣿⣤⣤⣼⣿⣿"
+    echo -e "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠋⠀${RESET}"
+
+    # Pomodoro (Vert)
+    printf "\n\n${GREEN}Pomodoro — %s\n  %02d:%02d${RESET}\n" "$STATUS" $((TIMER/60)) $((TIMER%60))
+
+    # Musique (Bleu + Blanc)
+    printf "\n\n${BLUE}[%s]${RESET}\n" "$CLEAN_NAME"
+    printf "${WHITE}%s${RESET}\n\n" "$TIME_INFO"
+
+    # Logique Timer
+    sleep 1
+    TIMER=$((TIMER - 1))
+
+    if [ $TIMER -le 0 ]; then
+        if [ "$STATUS" = "FOCUS" ]; then
+            STATUS="BREAK"
+            TIMER=$BREAK_TIME
+        else
+            STATUS="FOCUS"
+            TIMER=$FOCUS_TIME
+        fi
+        clear
+    fi
+done
