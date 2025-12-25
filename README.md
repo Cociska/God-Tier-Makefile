@@ -47,7 +47,7 @@ This Makefile relies on external scripts and system tools (FZF, Python, etc.).
 ### 1) Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/God-Tier-Makefile.git
+git clone https://github.com/Cociska/God-Tier-Makefile.git
 cd God-Tier-Makefile
 ```
 
@@ -61,7 +61,6 @@ chmod +x install.sh
 ./install.sh
 ```
 
-> ⚠️ **Important:** restart your terminal after installation to enable FZF shortcuts (`CTRL+R`, `CTRL+T`).
 
 ---
 
@@ -157,20 +156,9 @@ A (pretty) complete list of targets available in the Makefile.
 
 ---
 
-## ⚙️ Customization
-
-All scripts are located in `~/Makefile/scripts`. You can tweak them to:
-
-- change the radio stream URL (in `pomodoro.sh` or `radio`)
-- adjust Pomodoro durations
-- tune terminal colors / output formatting
-
----
-
 ## 🤝 Contributing
 
-Fork it, break it, improve it, PR it.  
-New scripts and quality-of-life targets are welcome.
+Any contribution is welcome !
 
 ---
 
