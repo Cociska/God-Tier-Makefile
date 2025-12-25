@@ -3,11 +3,10 @@
 # ==================================================
 
 CC              = epiclang
-TESTS_CC        = gcc
 CFLAGS          = -Wall -Wextra -Werror
 CSFMLFLAGS      = -lcsfml-window -lcsfml-graphics -lcsfml-audio -lcsfml-system
 MATHSFLAGS      = -lm
-CRITERION_FLAGS = -lcriterion
+CRITERION_FLAGS = -lcriterion --coverage
 
 # ==================================================
 # Colors
@@ -26,68 +25,17 @@ C_PURPLE  = \033[35m
 # Paths & Files
 # ==================================================
 
-RDR_FILE   = 1000_planes_10_towers.rdr
 BROWSER    = firefox
 
 SCRIPTS_PATH    =  ~/Makefile/scripts
 SRC_PATH   = src/
 TESTS_PATH = tests/
 UTILS_PATH = utils/
-PATH_LIBMY  = lib/my/
-PATH_LIBPRINTF  = lib/my_printf/
 
-SRC = $(PATH_LIBMY)my_compute_power_rec.c \
-      $(PATH_LIBMY)my_compute_square_root.c \
-      $(PATH_LIBMY)my_find_prime_sup.c \
-      $(PATH_LIBMY)my_getnbr.c \
-      $(PATH_LIBMY)my_isneg.c \
-      $(PATH_LIBMY)my_is_prime.c \
-      $(PATH_LIBMY)my_putchar.c \
-      $(PATH_LIBMY)my_put_nbr.c \
-      $(PATH_LIBMY)my_putstr.c \
-      $(PATH_LIBMY)my_revstr.c \
-      $(PATH_LIBMY)my_showmem.c \
-      $(PATH_LIBMY)my_showstr.c \
-      $(PATH_LIBMY)my_sort_int_array.c \
-      $(PATH_LIBMY)my_strcapitalize.c \
-      $(PATH_LIBMY)my_strcat.c \
-      $(PATH_LIBMY)my_strcmp.c \
-      $(PATH_LIBMY)my_strcpy.c \
-      $(PATH_LIBMY)my_str_isalpha.c \
-      $(PATH_LIBMY)my_str_islower.c \
-      $(PATH_LIBMY)my_str_isnum.c \
-      $(PATH_LIBMY)my_str_isprintable.c \
-      $(PATH_LIBMY)my_str_isupper.c \
-      $(PATH_LIBMY)my_strlen.c \
-      $(PATH_LIBMY)my_strlowcase.c \
-      $(PATH_LIBMY)my_strncat.c \
-      $(PATH_LIBMY)my_strncmp.c \
-      $(PATH_LIBMY)my_strncpy.c \
-      $(PATH_LIBMY)my_strstr.c \
-      $(PATH_LIBMY)my_strupcase.c \
-      $(PATH_LIBMY)my_swap.c \
-      $(PATH_LIBPRINTF)my_put_float.c \
-      $(PATH_LIBPRINTF)my_put_nbr_uint.c \
-      $(PATH_LIBPRINTF)my_put_oct.c \
-      $(PATH_LIBPRINTF)my_put_hex.c \
-      $(PATH_LIBPRINTF)my_printf.c \
-      $(PATH_LIBPRINTF)my_put_pointer.c \
-      $(PATH_LIBPRINTF)my_isinf.c \
-      $(PATH_LIBPRINTF)my_isnan.c \
-      $(PATH_LIBPRINTF)my_put_ieee.c \
-      $(PATH_LIBPRINTF)my_put_float_sci.c \
-      $(PATH_LIBPRINTF)my_put_bin.c \
-      $(SRC_PATH)my_count_files.c \
-      $(SRC_PATH)my_copy_name.c \
-      $(SRC_PATH)my_get_files.c \
-      $(SRC_PATH)my_sort_files.c \
-      $(SRC_PATH)my_display.c \
-      $(SRC_PATH)my_flag_r.c \
-      $(SRC_PATH)my_get_flags.c \
-      $(SRC_PATH)my_path_complete.c \
-      main.c
+SRC = 	main.c
 
-SRC_TESTS = $(TESTS_PATH)test_my_radar.c
+SRC_TESTS = $(TESTS_PATH)tests.c
+
 OBJ       = $(SRC:.c=.o)
 
 NAME      = my_ls
@@ -100,7 +48,7 @@ TEST_BIN  = test_runner
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) -o $(NAME) $(OBJ) $(CSFMLFLAGS) $(MATHSFLAGS)
+	@$(CC) -o $(NAME) $(OBJ)
 	@echo "$(C_GREEN)Compiled (^_^)$(C_RESET)"
 	@$(MAKE) --no-print-directory signature
 
@@ -109,14 +57,9 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 auto_build:
-	@echo "$(C_CYAN)>>> Auto-Build System Online (Global Watch)...$(C_RESET)"
-	@echo "$(C_CYAN)>>> Watching ALL files (excluding .git & artifacts)$(C_RESET)"
-	@while true; do \
-		inotifywait -q -r -e close_write --exclude '(\.git/|\.o$$|$(NAME)$$)' . 2>/dev/null; \
-		echo "$(C_YELLOW)⚡ Change detected. Rebuilding...$(C_RESET)"; \
-		$(MAKE) --no-print-directory; \
-		echo "$(C_GREEN)Build finished. Waiting...$(C_RESET)"; \
-	done
+	@clear
+	@echo "Recommendation : open in a background terminal :P"
+	@$(SCRIPTS_PATH)/auto_build.sh
 
 # ==================================================
 # Run & Debug
@@ -131,7 +74,7 @@ docker:
 	@docker run -it -v ./:/usr/app epitechcontent/epitest-docker:latest
 
 debug:
-	@gcc -g3 $(SRC) -o $(NAME)_debug $(CFLAGS) $(CSFMLFLAGS) $(MATHSFLAGS)
+	@gcc -g3 $(SRC) -o $(NAME)_debug $(CFLAGS)
 	@echo "$(C_CYAN)>>> Starting GDB...$(C_RESET)"
 	@gdb -ex "break main" -ex "run" ./$(NAME)_debug
 	@rm -f $(NAME)_debug
@@ -185,13 +128,7 @@ re: fclean all
 
 commit:
 	@clear
-	@$(MAKE) --no-print-directory fclean
-	@git add .
-	@echo "$(C_YELLOW)Files added ^_^$(C_RESET)"
-	@git commit -m "$(MSG)"
-	@echo "$(C_YELLOW)Commit created with provided message :]$(C_RESET)"
-	@git push --quiet
-	@echo "$(C_GREEN)Changes pushed to GitHub <3$(C_RESET)"
+	@$(SCRIPTS_PATH)/commit.sh
 	@$(MAKE) --no-print-directory signature
 
 restore:
@@ -220,16 +157,8 @@ count:
 	@$(MAKE) --no-print-directory signature
 
 stats:
-	@echo ""
-	@echo "$(C_BOLD)$(C_CYAN)Project statistics$(C_RESET)"
-	@echo "$(C_CYAN)------------------$(C_RESET)"
-	@echo "$(C_CYAN)Source files :$(C_RESET) $(C_BOLD)$$(echo $(SRC) | wc -w)$(C_RESET)"
-	@echo "$(C_CYAN)Test files   :$(C_RESET) $(C_BOLD)$$(echo $(SRC_TESTS) | wc -w)$(C_RESET)"
-	@echo "$(C_CYAN)Utils files  :$(C_RESET) $(C_BOLD)$$(ls $(UTILS_PATH)/*.c 2>/dev/null | wc -l)$(C_RESET)"
-	@echo "$(C_CYAN)Total lines  :$(C_RESET) $(C_BOLD)$$(wc -l $(SRC) | tail -n 1 | awk '{print $$1}')$(C_RESET)"
-	@echo "$(C_CYAN)------------------$(C_RESET)"
-	@echo ""
-	@$(MAKE) --no-print-directory signature
+	@clear
+	@$(SCRIPTS_PATH)/stats.sh
 
 # ==================================================
 # Signature & Fun
@@ -264,12 +193,8 @@ radio:
 	@echo "$(C_CYAN)Radio started in background. Use 'killall mpv' to stop.$(C_RESET)"
 
 menu:
-	@echo "$(C_CYAN)⚡ Select a target:$(C_RESET)"
-	@t=$$(printf "run\nauto_build\ntests\nleaks\ndebug\ndocker\ncommit\nbranch\nrestore\ngit_log\npomodoro\ncoffee\nweather\nstar_wars\nclean\nfclean" | fzf --height=50% --layout=reverse --border --prompt="Make > " --pointer="▶" --marker="✓") && \
-	if [ -n "$$t" ]; then \
-	   echo "$(C_GREEN)Executing: make $$t $(C_RESET)"; \
-	   $(MAKE) --no-print-directory $$t; \
-	fi
+	@clear
+	@$(SCRIPTS_PATH)/menu.sh
 
 # ==================================================
 # Help
