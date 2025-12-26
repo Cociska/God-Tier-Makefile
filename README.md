@@ -1,175 +1,107 @@
 # ⚡ God Tier Makefile
 
-# Nom du Projet
-
-**Langages:**  
-![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![Make](https://img.shields.io/badge/Make-427819?style=for-the-badge&logo=gnu&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-
-**Outils:**  
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![fzf](https://img.shields.io/badge/fzf-4A90E2?style=for-the-badge&logo=fuzzy&logoColor=white)
-![mpv](https://img.shields.io/badge/mpv-6441A5?style=for-the-badge&logo=mpv&logoColor=white)
-![socat](https://img.shields.io/badge/socat-2C2D72?style=for-the-badge&logo=linux&logoColor=white)
-![inotify](https://img.shields.io/badge/inotify--tools-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![yt-dlp](https://img.shields.io/badge/yt--dlp-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
-
-> **Stop just compiling.**  
-> Turn your terminal into a complete productivity dashboard for C development.
-
-A universal **Makefile** + a suite of **Bash scripts** to supercharge your workflow (especially handy for **Epitech**, **42**, and bigger C projects).  
-It covers compilation, testing, Git ergonomics, focus timers, and a few fun terminal utilities.
+Un **template Makefile** pour projets C (Epitech/42) qui transforme ton terminal en **dashboard** : build, tests, Git, debug, Docker, + un assistant IA et un mode focus.
 
 ---
 
-## 🧭 Table of Contents
-
-- [✨ Features](#-features)
-- [🚀 Installation](#-installation)
-- [📖 Use it in your project](#-use-it-in-your-project)
-- [📚 Commands Reference](#-commands-reference)
-  - [🛠️ Build & Execution](#️-build--execution)
-  - [🧪 Quality & Testing](#-quality--testing)
-  - [🐙 Git Workflow](#-git-workflow)
-  - [🍅 Productivity & Fun](#-productivity--fun)
-  - [📊 Info & Stats](#-info--stats)
-  - [🧹 Cleaning](#-cleaning)
-- [⚙️ Customization](#️-customization)
-- [🤝 Contributing](#-contributing)
-
----
-
-## ✨ Features
-
-- **Interactive Dashboard**: navigate all commands using a fuzzy finder menu (`make menu`).
-- **Live Monitoring**: auto-recompile your project on every file save (`make auto_build`).
-- **Git Automation**: manage branches, commits, and history visually without leaving the terminal.
-- **Quality Assurance**: one-command Valgrind leak checks, Criterion tests, coverage, Dockerized execution.
-- **Focus Mode**: integrated Pomodoro timer with optional “Lofi Girl” radio streaming.
-
----
-
-## 🚀 Installation
-
-This Makefile relies on external scripts and system tools (FZF, Python, etc.).  
-**You must run the installer first.**
-
-### 1) Clone the repository
+## 🚀 Installation (one-time)
 
 ```bash
 git clone https://github.com/Cociska/God-Tier-Makefile.git
 cd God-Tier-Makefile
-```
-
-### 2) Run the automated installer
-
-This script installs system dependencies (FZF, Valgrind, Inotify, MPV...), Python requirements (`yt-dlp`),  
-and deploys scripts to `~/Makefile/scripts`.
-
-```bash
 ./install.sh
 ```
 
+> Pense à **relancer ton terminal** après l’installation.
 
 ---
 
-## 📖 Use it in your project
+## 🧰 Usage rapide
 
-This Makefile is **portable**. Once installed, you can use it in any C project.
-
-### 1) Copy the Makefile into your project root
+### 1) Initialiser un projet
+Dans n’importe quel dossier de projet :
 
 ```bash
-cp ~/God-Tier-Makefile/Makefile ./MyProject/
+makefile
 ```
 
-### 2) Edit variables at the top of the `Makefile`
+➡️ Copie automatiquement le template dans le dossier courant.
+
+### 2) Modifier les variables (important)
+Ouvre le **`Makefile`** du projet, puis **modifie les variables** en haut du fichier pour **matcher tes besoins** (nom du binaire, sources, flags, libs, etc.) :
 
 ```makefile
-# Name of your binary
-NAME      = my_program
-
-# Your source files
-SRC       = src/main.c \
-            src/utils.c \
-            ...
+NAME = mon_binaire
+SRC  = src/main.c src/autre.c
 ```
 
-### 3) Launch the dashboard
-
+### 3) Lancer le dashboard
 ```bash
 make menu
 ```
 
 ---
 
-## 📚 Commands Reference
+## 🏗️ Build & Dev
 
-A (pretty) complete list of targets available in the Makefile.
-
-### 🛠️ Build & Execution
-
-| Command | Description |
+| Commande | Ce que ça fait |
 |---|---|
-| `make` / `make all` | Compiles the project and generates the binary. |
-| `make run` | Compiles (if needed) and executes the program. |
-| `make auto_build` | **Live Monitor:** watches your sources and recompiles on every save. |
-| `make debug` | Compiles with debug flags (`-g3`) and launches **GDB** automatically. |
-| `make re` | Forces a full rebuild (clean + compile). |
-
-### 🧪 Quality & Testing
-
-| Command | Description |
-|---|---|
-| `make tests` | Compiles and runs unit tests (Criterion). |
-| `make coverage` | Runs tests and opens an HTML code coverage report. |
-| `make leaks` | Runs the program through **Valgrind** to check for memory leaks. |
-| `make docker` | Launches the Epitech/standard Docker container for a clean Linux run. |
-
-### 🐙 Git Workflow
-
-| Command | Description |
-|---|---|
-| `make commit` | Cleans repo, adds all files, commits (`MSG="foo"`), and pushes. |
-| `make branch` | **Interactive:** switch branches or create a new one by typing a name. |
-| `make restore` | **Interactive:** view file diffs and discard local changes selectively. |
-| `make git_log` | **Interactive:** browse commit history with side-by-side diff preview. |
-
-### 🍅 Productivity & Fun
-
-| Command | Description |
-|---|---|
-| `make pomodoro` | Starts a **25m Focus / 5m Break** timer with music integration. |
-| `make coffee` | Starts a simple coffee break timer. |
-| `make radio` | Streams “Lofi Girl” radio in the background (audio only). |
-| `make weather` | Fetches and displays the current weather report. |
-| `make joke` | Fetches a random programming joke from an API. |
-| `make star_wars` | Streams Star Wars (Episode IV) in ASCII art via Telnet. |
-
-### 📊 Info & Stats
-
-| Command | Description |
-|---|---|
-| `make stats` | Displays project statistics (file count, types, utils, etc.). |
-| `make count` | Counts total lines of code (LOC). |
-| `make signature` | Displays the custom project header/signature. |
-| `make help` | Displays the list of available commands. |
-| `make menu` | Opens the **Interactive Dashboard** to select any command. |
-
-### 🧹 Cleaning
-
-| Command | Description |
-|---|---|
-| `make clean` | Removes object files (`.o`) and temporary test artifacts. |
-| `make fclean` | Removes the binary and performs a full cleanup. |
+| `make` | Compile (CSFML/Maths friendly). |
+| `make run` | Compile + exécute. |
+| `make auto_build` | Watch mode : recompile à chaque save (inotify). |
+| `make debug` | Build `-g3` + lance GDB. |
+| `make docker` | Lance l’environnement Epitech Docker (epitest-docker). |
 
 ---
 
-## 🤝 Contributing
+## 🧪 Tests & Qualité
 
-Any contribution is welcome !
+| Commande | Ce que ça fait |
+|---|---|
+| `make leaks` | Valgrind (fuites mémoire). |
+| `make tests` | Unit tests (Criterion). |
+| `make coverage` | Rapport HTML de coverage (lcov). |
 
 ---
 
-Made with 💜 and too much caffeine.
+## 🐙 Git (FZF inside)
+
+| Commande | Ce que ça fait |
+|---|---|
+| `make branch` | Switch / création de branche interactive. |
+| `make commit` | `add .` + commit + push (message demandé). |
+| `make restore` | Restore interactif des fichiers modifiés. |
+| `make git_log` | Historique interactif + preview diff. |
+
+---
+
+## 🤖 Assistant IA (Claude)
+
+> Requiert une clé API Anthropic. Configuration : `make api`
+
+| Commande | Ce que ça fait |
+|---|---|
+| `make claude MSG="..."` | Question à Claude depuis le terminal. |
+| `make claude_fix` | Compile, puis en cas d’erreur envoie les logs à l’IA (explications + pistes de fix). |
+
+---
+
+## 🍅 Focus & Utils
+
+| Commande | Ce que ça fait |
+|---|---|
+| `make pomodoro` | Pomodoro 25/5 + Lofi Girl + statut batterie. |
+| `make stats` | Stats de code (lignes, fichiers, densité). |
+| `make radio` | Radio YouTube en background (mpv). |
+| `make coffee` / `make joke` | Pause café / blague dev. |
+
+---
+
+## 🧹 Maintenance
+
+- **Update :** `make update` (pull + réinstalle scripts)
+- **Uninstall :** `make uninstall` (nettoyage complet, commande globale incluse)
+
+---
+
+<sub>Made with 💜 and un café beaucoup trop déterminé.</sub>
