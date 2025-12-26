@@ -1,7 +1,19 @@
 # ⚡ God Tier Makefile
 
-![Language](https://img.shields.io/badge/Language-Bash-00599C)
-![Tools](https://img.shields.io/badge/Tools-FZF%20%7C%20Git%20%7C%20Docker-orange)
+# Nom du Projet
+
+**Langages:**  
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
+![Make](https://img.shields.io/badge/Make-427819?style=for-the-badge&logo=gnu&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+
+**Outils:**  
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![fzf](https://img.shields.io/badge/fzf-4A90E2?style=for-the-badge&logo=fuzzy&logoColor=white)
+![mpv](https://img.shields.io/badge/mpv-6441A5?style=for-the-badge&logo=mpv&logoColor=white)
+![socat](https://img.shields.io/badge/socat-2C2D72?style=for-the-badge&logo=linux&logoColor=white)
+![inotify](https://img.shields.io/badge/inotify--tools-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![yt-dlp](https://img.shields.io/badge/yt--dlp-FF0000?style=for-the-badge&logo=youtube&logoColor=white)
 
 > **Stop just compiling.**  
 > Turn your terminal into a complete productivity dashboard for C development.
