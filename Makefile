@@ -213,6 +213,9 @@ claude_fix:
 update:
 	@clear
 	@$(SCRIPTS_PATH)/update.sh
+	
+uninstall:
+	@$(SCRIPTS_PATH)/uninstall.sh
 
 # ==================================================
 # Help & menu

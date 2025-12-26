@@ -72,3 +72,17 @@ echo -e "2. Edit SRC and NAME variables."
 echo -e "3. Run 'make menu'."
 echo -e "--------------------------------------------------------"
 echo -e "${YELLOW}Please restart your terminal to enable FZF shortcuts.${RESET}"
+# ... (après la copie des scripts et du Makefile template)
+
+echo -e "${BLUE}>>> Creating global 'makefile' command...${RESET}"
+
+# Suppression d'une éventuelle ancienne version
+sudo rm -f /usr/local/bin/makefile
+
+# Création du lien symbolique
+# Cela permet de taper 'makefile' n'importe où
+sudo ln -sf "$HOME/Makefile/scripts/setup.sh" /usr/local/bin/makefile
+
+echo -e "${GREEN}✅ Installation terminée !${RESET}"
+echo -e "${CYAN}Usage : tapez makefile dans le terminal et il sera généré :${RESET}"
+echo -e "${BOLD}makefile${RESET}"
