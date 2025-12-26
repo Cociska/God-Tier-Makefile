@@ -1,8 +1,7 @@
 # ⚡ God Tier Makefile
 
-![Language](https://img.shields.io/badge/Language-C%20%2F%20Bash-00599C)
+![Language](https://img.shields.io/badge/Language-Bash-00599C)
 ![Tools](https://img.shields.io/badge/Tools-FZF%20%7C%20Git%20%7C%20Docker-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 > **Stop just compiling.**  
 > Turn your terminal into a complete productivity dashboard for C development.
