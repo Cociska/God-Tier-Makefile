@@ -1,6 +1,6 @@
 # ⚡ God Tier Makefile
 
-Un **template Makefile** pour projets C (Epitech/42) qui transforme ton terminal en **dashboard** : build, tests, Git, debug, Docker, + un assistant IA et un mode focus.
+A **Makefile template** for C projects (Epitech/42) that turns your terminal into a **productivity dashboard**: build, tests, Git, debug, Docker, plus an AI assistant and focus tools.
 
 ---
 
@@ -12,30 +12,30 @@ cd God-Tier-Makefile
 ./install.sh
 ```
 
-> Pense à **relancer ton terminal** après l’installation.
+> Remember to **restart your terminal** after installation.
 
 ---
 
-## 🧰 Usage rapide
+## 🧰 Quick usage
 
-### 1) Initialiser un projet
-Dans n’importe quel dossier de projet :
+### 1) Initialize a project
+Inside any project directory:
 
 ```bash
 makefile
 ```
 
-➡️ Copie automatiquement le template dans le dossier courant.
+➡️ Automatically copies the Makefile template into the current folder.
 
-### 2) Modifier les variables (important)
-Ouvre le **`Makefile`** du projet, puis **modifie les variables** en haut du fichier pour **matcher tes besoins** (nom du binaire, sources, flags, libs, etc.) :
+### 2) Edit variables (important)
+Open the **`Makefile`** in your project, then **edit the variables** at the top to **match your needs** (binary name, sources, flags, libs, etc.):
 
 ```makefile
-NAME = mon_binaire
-SRC  = src/main.c src/autre.c
+NAME = my_binary
+SRC  = src/main.c src/other.c
 ```
 
-### 3) Lancer le dashboard
+### 3) Launch the dashboard
 ```bash
 make menu
 ```
@@ -44,64 +44,64 @@ make menu
 
 ## 🏗️ Build & Dev
 
-| Commande | Ce que ça fait |
+| Command | What it does |
 |---|---|
-| `make` | Compile (CSFML/Maths friendly). |
-| `make run` | Compile + exécute. |
-| `make auto_build` | Watch mode : recompile à chaque save (inotify). |
-| `make debug` | Build `-g3` + lance GDB. |
-| `make docker` | Lance l’environnement Epitech Docker (epitest-docker). |
+| `make` | Compile the project (CSFML/Maths friendly). |
+| `make run` | Compile and run. |
+| `make auto_build` | Watch mode: rebuild on every file save (inotify). |
+| `make debug` | Build with `-g3` and launch GDB. |
+| `make docker` | Launch the Epitech Docker environment. |
 
 ---
 
-## 🧪 Tests & Qualité
+## 🧪 Tests & Quality
 
-| Commande | Ce que ça fait |
+| Command | What it does |
 |---|---|
-| `make leaks` | Valgrind (fuites mémoire). |
-| `make tests` | Unit tests (Criterion). |
-| `make coverage` | Rapport HTML de coverage (lcov). |
+| `make leaks` | Run Valgrind to detect memory leaks. |
+| `make tests` | Run unit tests (Criterion). |
+| `make coverage` | Generate and open an HTML coverage report (lcov). |
 
 ---
 
-## 🐙 Git (FZF inside)
+## 🐙 Git (FZF powered)
 
-| Commande | Ce que ça fait |
+| Command | What it does |
 |---|---|
-| `make branch` | Switch / création de branche interactive. |
-| `make commit` | `add .` + commit + push (message demandé). |
-| `make restore` | Restore interactif des fichiers modifiés. |
-| `make git_log` | Historique interactif + preview diff. |
+| `make branch` | Interactive branch switch / creation. |
+| `make commit` | `add .` + commit + push (message prompted). |
+| `make restore` | Interactive restore of modified files. |
+| `make git_log` | Interactive git history with diff preview. |
 
 ---
 
-## 🤖 Assistant IA (Claude)
+## 🤖 AI Assistant (Claude)
 
-> Requiert une clé API Anthropic. Configuration : `make api`
+> Requires an Anthropic API key. Setup with: `make api`
 
-| Commande | Ce que ça fait |
+| Command | What it does |
 |---|---|
-| `make claude MSG="..."` | Question à Claude depuis le terminal. |
-| `make claude_fix` | Compile, puis en cas d’erreur envoie les logs à l’IA (explications + pistes de fix). |
+| `make claude MSG="..."` | Ask Claude directly from the terminal. |
+| `make claude_fix` | Compile, then send error logs to the AI for explanations and fix hints. |
 
 ---
 
 ## 🍅 Focus & Utils
 
-| Commande | Ce que ça fait |
+| Command | What it does |
 |---|---|
-| `make pomodoro` | Pomodoro 25/5 + Lofi Girl + statut batterie. |
-| `make stats` | Stats de code (lignes, fichiers, densité). |
-| `make radio` | Radio YouTube en background (mpv). |
-| `make coffee` / `make joke` | Pause café / blague dev. |
+| `make pomodoro` | Pomodoro timer (25/5) with lofi and battery status. |
+| `make stats` | Code statistics (lines, files, density). |
+| `make radio` | Play a YouTube radio in background (mpv). |
+| `make coffee` / `make joke` | Coffee break timer or random dev joke. |
 
 ---
 
 ## 🧹 Maintenance
 
-- **Update :** `make update` (pull + réinstalle scripts)
-- **Uninstall :** `make uninstall` (nettoyage complet, commande globale incluse)
+- **Update:** `make update` (pulls repo and reinstalls scripts)
+- **Uninstall:** `make uninstall` (full cleanup, global command included)
 
 ---
 
-<sub>Made with 💜 and un café beaucoup trop déterminé.</sub>
+<sub>Made with 💜 and a dangerously motivated coffee.</sub>
