@@ -1,26 +1,40 @@
 #!/bin/bash
 
-# --- Configuration ---
+# ==================================================
+# Makefile Interactive Menu (fzf)
+# ==================================================
+
+# --- Targets ---
 TARGETS=(
     "run"
     "auto_build"
-    "tests"
-    "leaks"
     "debug"
     "docker"
+    "leaks"
+    "tests"
+    "coverage"
     "commit"
     "branch"
     "restore"
     "git_log"
+    "count"
+    "stats"
+    "api"
+    "claude"
+    "claude_fix"
+    "update"
     "pomodoro"
     "coffee"
     "weather"
+    "joke"
+    "radio"
     "star_wars"
     "clean"
     "fclean"
+    "re"
 )
 
-# --- Couleurs pour echo (Bash) ---
+# --- Couleurs ---
 C_RESET='\033[0m'
 C_CYAN='\033[1;36m'
 C_GREEN='\033[1;32m'
@@ -35,26 +49,24 @@ fi
 # --- Construction du Menu ---
 LIST=$(printf "%s\n" "${TARGETS[@]}")
 
-echo -e "${C_CYAN}⚡ Select a Make target:${C_RESET}"
+echo -e "${C_CYAN}⚡ Makefile menu${C_RESET}"
 
-# Lancement de FZF avec des couleurs nommées (valides)
-# fg:-1 signifie "couleur par défaut du terminal"
 SELECTED=$(echo "$LIST" | fzf \
-    --height=50% \
+    --height=60% \
     --layout=reverse \
     --border \
-    --prompt="Make > " \
+    --prompt="make > " \
     --pointer="▶" \
-    --marker="✓" \
     --info=inline \
-    --header="Use arrows to move, Enter to select" \
+    --header="↑↓ navigate • Enter run • Esc cancel" \
     --color="fg:-1,bg:-1,hl:magenta,fg+:green,bg+:-1,hl+:magenta,info:yellow,prompt:cyan,pointer:green"
 )
 
 # --- Exécution ---
 if [ -n "$SELECTED" ]; then
-    echo -e "${C_GREEN}>>> Executing: make $SELECTED ${C_RESET}"
+    echo -e "${C_GREEN}>>> Executing: make $SELECTED${C_RESET}"
     make --no-print-directory "$SELECTED"
 else
     echo -e "${C_RED}✖ Cancelled.${C_RESET}"
 fi
+

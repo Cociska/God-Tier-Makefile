@@ -27,6 +27,7 @@ C_BLUE    = \033[34m
 C_CYAN    = \033[36m
 C_YELLOW  = \033[93m
 C_PURPLE  = \033[35m
+C_ORANGE  = \033[38;5;208m
 
 # ==================================================
 # Paths & Files
@@ -174,11 +175,8 @@ stats:
 	@$(SCRIPTS_PATH)/stats.sh
 
 # ==================================================
-# Signature & Fun
+# Fun & focus
 # ==================================================
-
-signature:
-	@$(SCRIPTS_PATH)/signature.sh
 
 star_wars:
 	@ssh starwarstel.net
@@ -207,13 +205,34 @@ radio:
 	@mpv --no-video --really-quiet "$(RADIO_URL)" &
 	@echo "$(C_CYAN)Radio started in background. Use 'killall mpv' to stop.$(C_RESET)"
 
+# ==================================================
+# AI Assistant
+# ==================================================
+
+api:
+	@$(SCRIPTS_PATH)/api.sh
+
+claude:
+	@$(SCRIPTS_PATH)/claude.py $(MSG)
+	
+claude_fix:
+	@$(SCRIPTS_PATH)/claude_fix.sh
+
+# ==================================================
+# Update & Maintenance
+# ==================================================
+
+update:
+	@clear
+	@$(SCRIPTS_PATH)/update.sh
+
+# ==================================================
+# Help & menu
+# ==================================================
+
 menu:
 	@clear
 	@$(SCRIPTS_PATH)/menu.sh
-
-# ==================================================
-# Help
-# ==================================================
 
 help:
 	@echo ""
@@ -233,7 +252,7 @@ help:
 	@echo "$(C_BLUE)  make re$(C_RESET)         Rebuild everything"
 	@echo ""
 	@echo "$(C_YELLOW)  make commit$(C_RESET)     Clean, commit and push"
-	@echo "$(C_YELLOW)  make branch$(C_RESET)     Create or Switch branch (fzf)"
+	@echo "$(C_YELLOW)  make branch$(C_RESET)     Create or switch branch (fzf)"
 	@echo "$(C_YELLOW)  make restore$(C_RESET)    Discard changes (fzf)"
 	@echo "$(C_YELLOW)  make git_log$(C_RESET)    Browse history (fzf)"
 	@echo "                      Usage: make commit MSG='...'"
@@ -241,17 +260,36 @@ help:
 	@echo "$(C_CYAN)  make count$(C_RESET)      Count total lines of C code"
 	@echo "$(C_CYAN)  make stats$(C_RESET)      Show project statistics"
 	@echo ""
+	@echo "$(C_ORANGE)  make api$(C_RESET)        Launch AI API assistant"
+	@echo "$(C_ORANGE)  make claude$(C_RESET)     Ask Claude (MSG='...')"
+	@echo "$(C_ORANGE)  make claude_fix$(C_RESET) AI-powered fix suggestion"
+	@echo ""
 	@echo "$(C_PURPLE)  make signature$(C_RESET)  Show the Makefile signature"
 	@echo "$(C_PURPLE)  make pomodoro$(C_RESET)   Launch Pomodoro (Omori Theme)"
-	@echo "$(C_PURPLE)  make coffee$(C_RESET)     Take a coffee break (timer)"
+	@echo "$(C_PURPLE)  make coffee$(C_RESET)     Take a coffee break"
 	@echo "$(C_PURPLE)  make weather$(C_RESET)    Check weather in Lille"
 	@echo "$(C_PURPLE)  make joke$(C_RESET)       Get a random dev joke"
 	@echo "$(C_PURPLE)  make star_wars$(C_RESET)  Watch Star Wars in ASCII"
 	@echo ""
-	@echo "$(C_CYAN)  make menu$(C_RESET)       Display the navigation menu"
+	@echo "$(C_BLUE)  make update$(C_RESET)     Update tools & scripts"
+	@echo ""
+	@echo "$(C_CYAN)  make menu$(C_RESET)       Display navigation menu"
 	@echo "$(C_CYAN)  make help$(C_RESET)       Display this help message"
 	@echo ""
 	@$(MAKE) --no-print-directory signature
 	@echo ""
 
-.PHONY: all clean fclean re run leaks tests coverage commit restore branch git_log count stats help menu signature star_wars pomodoro coffee weather joke debug docker auto_build radio
+signature:
+	@$(SCRIPTS_PATH)/signature.sh
+
+.PHONY: \
+	all run auto_build docker debug leaks \
+	tests coverage \
+	clean fclean re \
+	commit restore branch git_log \
+	count stats \
+	api claude claude_fix \
+	update \
+	menu help signature \
+	star_wars pomodoro coffee weather joke radio
+
