@@ -162,13 +162,7 @@ git_log:
 
 count:
 	@clear
-	@echo ""
-	@echo "$(C_BOLD)$(C_CYAN)Lines of C code:$(C_RESET)"
-	@echo "$(C_CYAN)------------------$(C_RESET)"
-	@echo "$(C_BOLD)$(C_CYAN)$$(wc -l $(SRC) | tail -n 1)$(C_RESET)"
-	@echo "$(C_CYAN)------------------$(C_RESET)"
-	@echo ""
-	@$(MAKE) --no-print-directory signature
+	@$(SCRIPTS_PATH)/count.sh
 
 stats:
 	@clear
@@ -179,7 +173,7 @@ stats:
 # ==================================================
 
 star_wars:
-	@ssh starwarstel.net
+	@$(SCRIPTS_PATH)/star_wars.sh
 
 pomodoro:
 	@clear
@@ -187,23 +181,17 @@ pomodoro:
 
 weather:
 	@clear
-	@curl -s "wttr.in/$(CITY)?format=3"
-	@echo ""
-	@curl -s "wttr.in/$(CITY)?0"
+	@$(SCRIPTS_PATH)/weather.sh
 
 coffee:
 	@clear
 	@$(SCRIPTS_PATH)/coffee.sh
 
 joke:
-	@echo "\033[36m"
-	@curl -s https://v2.jokeapi.dev/joke/Programming?format=txt
-	@echo "\033[0m"
+	@$(SCRIPTS_PATH)/joke.sh
 
 radio:
-	@echo "$(C_PURPLE)>>> Tuning in to Lofi Girl Radio... 🎧$(C_RESET)"
-	@mpv --no-video --really-quiet "$(RADIO_URL)" &
-	@echo "$(C_CYAN)Radio started in background. Use 'killall mpv' to stop.$(C_RESET)"
+	@$(SCRIPTS_PATH)/radio.sh
 
 # ==================================================
 # AI Assistant
