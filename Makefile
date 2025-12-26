@@ -8,13 +8,6 @@ CSFMLFLAGS      = -lcsfml-window -lcsfml-graphics -lcsfml-audio -lcsfml-system
 MATHSFLAGS      = -lm
 CRITERION_FLAGS = -lcriterion --coverage
 
-# ==============================================================================
-#   LOCATION & VIBES
-# ==============================================================================
-
-CITY        	= Lille
-RADIO_URL   	= https://www.youtube.com/watch?v=jfKfPfyJRdk
-
 # ==================================================
 # Colors
 # ==================================================
