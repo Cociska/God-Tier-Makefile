@@ -56,10 +56,14 @@ echo -e "${BLUE}>>> Deploying scripts to $TARGET_DIR...${RESET}"
 # Create directory
 mkdir -p "$TARGET_DIR"
 
-# Copy scripts
+# ... (Partie existante : copie des scripts)
 cp -r scripts/* "$TARGET_DIR/"
 chmod +x "$TARGET_DIR"/*.sh
 
+# --- AJOUT ICI ---
+echo -e "${BLUE}>>> Copying reference Makefile to ~/Makefile/...${RESET}"
+cp Makefile "$HOME/Makefile/Makefile"
+# -----------------
 echo -e "${GREEN}✅ Installation Complete!${RESET}"
 echo -e "--------------------------------------------------------"
 echo -e "To use the Makefile in your projects:"
