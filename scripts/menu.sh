@@ -38,7 +38,7 @@ make count	count lines	count
 make stats	project stats	stats
 make api	setup api	api
 make claude	ask claude	claude
-make claude_fix	ai fix logs	claude_fix
+make claude_debug	explain compilation issue	claude_fix
 make pomodoro	focus timer	pomodoro
 make coffee	break timer	coffee
 make weather	check weather	weather
