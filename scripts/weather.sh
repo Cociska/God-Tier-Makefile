@@ -23,6 +23,7 @@ fi
 echo -e "\n${CYAN}>>> Fetching weather for $CITY...${RESET}\n"
 
 # Affichage météo (Format 3 est compact + Format v2 complet)
-curl -s "wttr.in/$CITY?format=3"
+# AJOUT DE '&m' à la fin des URLs pour forcer le système Métrique (Celsius)
+curl -s "wttr.in/$CITY?format=3&m"
 echo ""
-curl -s "wttr.in/$CITY?0"
+curl -s "wttr.in/$CITY?0&m"
