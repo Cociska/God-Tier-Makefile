@@ -284,7 +284,7 @@ signature:
 	clean fclean re \
 	commit restore branch git_log \
 	count stats \
-	api claude claude_fix \
+	api claude claude_debug \
 	update \
 	menu help signature \
 	star_wars pomodoro coffee weather joke radio
