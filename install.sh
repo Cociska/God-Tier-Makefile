@@ -14,7 +14,7 @@ echo -e "${BLUE}🚀 Initializing God Tier Environment Setup...${RESET}"
 echo -e "${BLUE}>>> Checking System Dependencies...${RESET}"
 
 if command -v apt &> /dev/null; then
-    # Debian / Ubuntu / Kali / Epitech Dump
+    # Debian / Ubuntu / Kali
     PKG_MANAGER="sudo apt install -y"
     PACKAGES="make gcc git fzf curl mpv socat inotify-tools valgrind python3-pip"
 elif command -v dnf &> /dev/null; then
@@ -25,8 +25,18 @@ elif command -v pacman &> /dev/null; then
     # Arch Linux
     PKG_MANAGER="sudo pacman -S --noconfirm"
     PACKAGES="make gcc git fzf curl mpv socat inotify-tools valgrind python-pip"
+elif command -v apk &> /dev/null; then
+    # Alpine Linux / iSH (iOS)
+    PKG_MANAGER="apk add"
+    # Note : 'py3-pip' est le nom du paquet pip sur Alpine
+    PACKAGES="make gcc git fzf curl mpv socat inotify-tools valgrind py3-pip"
+    
+    # --- ASTUCE MAGIC ---
+    # On définit une fonction 'sudo' qui ne fait rien d'autre qu'exécuter la commande directe.
+    # Cela permet de "tromper" le reste du script qui contient des 'sudo' en dur.
+    sudo() { "$@"; }
 else
-    echo -e "${RED}Error: Unsupported Package Manager. Please install dependencies manually.${RESET}"
+    echo -e "${RED}Error: Unsupported Package Manager.${RESET}"
     exit 1
 fi
 
