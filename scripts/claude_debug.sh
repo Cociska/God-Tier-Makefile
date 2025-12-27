@@ -26,7 +26,7 @@ else
     ERROR_LOG=$(cat "$LOG_FILE")
     
     # Appel du script Python avec le prompt
-    "$CLAUDE_SCRIPT" "Voici mon erreur de compilation, explique-la brièvement et donne la solution : $ERROR_LOG"
+    "$CLAUDE_SCRIPT" "Voici mon erreur de compilation, explique-la brièvement et donne une solution : $ERROR_LOG"
 fi
 
 # Nettoyage

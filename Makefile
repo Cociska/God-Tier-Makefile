@@ -196,8 +196,8 @@ api:
 claude:
 	@$(SCRIPTS_PATH)/claude.py $(MSG)
 	
-claude_fix:
-	@$(SCRIPTS_PATH)/claude_fix.sh
+claude_debug:
+	@$(SCRIPTS_PATH)/claude_debug.sh
 
 # ==================================================
 # Update & Maintenance
