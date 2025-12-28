@@ -39,6 +39,9 @@ make stats	project stats	stats
 make api	setup api	api
 make claude	ask claude	claude
 make claude_debug	explain compilation issue	claude_fix
+make project_start	start timer	project_start
+make project_stop	stop timer	project_stop
+make project	view project time	project
 make pomodoro	focus timer	pomodoro
 make coffee	break timer	coffee
 make weather	check weather	weather

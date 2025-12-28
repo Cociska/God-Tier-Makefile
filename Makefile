@@ -185,6 +185,20 @@ joke:
 
 radio:
 	@$(SCRIPTS_PATH)/radio.sh
+	
+# ==================================================
+# Project Tracking
+# ==================================================
+
+project_start:
+	@$(SCRIPTS_PATH)/project_start.sh
+
+project_stop:
+	@$(SCRIPTS_PATH)/project_stop.sh
+
+project:
+	@clear
+	@$(SCRIPTS_PATH)/project.sh
 
 # ==================================================
 # AI Assistant
@@ -257,6 +271,11 @@ help:
 	@echo "  $(C_PURPLE)make radio$(C_RESET)        Lo-Fi radio (background)"
 	@echo "  $(C_PURPLE)make star_wars$(C_RESET)    Star Wars ASCII"
 	@echo ""
+	@echo "$(C_BOLD)$(C_ORANGE)Project Tracking$(C_RESET)"
+	@echo "  $(C_ORANGE)make project_start$(C_RESET)  Start timer (create/select project)"
+	@echo "  $(C_ORANGE)make project_stop$(C_RESET)   Stop current timer & save"
+	@echo "  $(C_ORANGE)make project$(C_RESET)        View time stats per project"
+	@echo ""
 	@echo "$(C_BOLD)$(C_ORANGE)AI$(C_RESET)"
 	@echo "  $(C_ORANGE)make api$(C_RESET)         Setup Claude API"
 	@echo "  $(C_ORANGE)make claude$(C_RESET)      Ask Claude from terminal"
@@ -285,7 +304,7 @@ signature:
 	commit restore branch git_log \
 	count stats \
 	api claude claude_debug \
-	update \
+	update uninstall \
 	menu help signature \
-	star_wars pomodoro coffee weather joke radio
-
+	star_wars pomodoro coffee weather joke radio \
+	project_start project_stop project
